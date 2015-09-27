@@ -1,0 +1,127 @@
+\documentclass[british]{tufte-handout}
+
+\usepackage{babel}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+\usepackage{listings}
+
+\usepackage[useregional,showdow]{datetime2}
+\DTMlangsetup[en-GB]{abbr}
+
+\def\iprintdate#1/#2/#3/{\DTMdisplaydate{#1}{#2}{#3}{-1}}
+\newcommand*{\printdate}[1]{\iprintdate#1/}
+
+\usepackage{tikz} %
+\usetikzlibrary{shapes, arrows, trees} % this is to allow the fork right path
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=red!20, text width=4.5em,
+text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=5em,
+text centered, rounded corners, minimum height=4em] \tikzstyle{line} =
+[draw, -latex'] \tikzstyle{cloud} = [draw, ellipse,fill=green!20, node
+distance=3cm, text width = 4.5em,minimum height=2em] \tikzstyle{input}
+= [draw, trapezium,trapezium left angle=70,trapezium right angle=-70,
+fill = blue!20,text width = 4.5em,minimum height=1cm, text centered]
+
+% tree diagram
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
+
+% line thickness
+\tikzset{
+  ultra thin/.style= {line width=0.1pt},
+  very thin/.style=  {line width=0.2pt},
+  thin/.style=       {line width=0.4pt},% thin is the default
+  semithick/.style=  {line width=0.6pt},
+  thick/.style=      {line width=0.8pt},
+  very thick/.style= {line width=1.2pt},
+  ultra thick/.style={line width=1.6pt}
+}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\include{plugins/listingstyle}
+
+\def\?#1{}
+
+\pgfmathtruncatemacro{\StartYear}{2015}
+\pgfmathtruncatemacro{\EndYear}{2016}
+
+\newread\mysource
+
+\title{Grow Working Hard\thanks{Inspired by Jonathan R. Shewchuk}}
+\author[Francesco Serafin]{Francesco Serafin}
+\date{15 May 2015}  % if the \date{} command is left out, the current date will be used
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+  \noindent This document describes my daily experiences on
+  Hydroinformatics and IT.  It provides recipes followed to reach each
+  and every small goal. The main purpose pursuaded is the redesign of
+  the famous hydrological model GEOtop.
+\end{abstract}
+
+% \printclassoptions
+
+GEOtop is a distributed model of the mass and energy balance of the
+hydrological cycle, which is applicable to simulations in continuum in
+small catchments. GEOtop deals with the effects of topography on the
+interaction between energy balance and hydrological cycle with
+peculiar solutions.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{GTlogo.png}
+\end{figure}
+
+\pagebreak
+
+\foreach \Year in {\StartYear,...,\EndYear} { \foreach \Month in
+  {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec} { \foreach \Day in
+    {1,...,31} { \IfFileExists{\Year/\Month/\Day.tex} {
+        \input{\Year/\Month/\Day.tex} \pagebreak }
+      { % files does not exist, so nothing to do
+      }
+
+    } } }
+
+\end{document}

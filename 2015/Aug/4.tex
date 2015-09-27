@@ -1,0 +1,74 @@
+\section{\printdate{2015/08/04} - GEOtop building on Windows 7 with Cygwin}\label{sec:20150804}
+
+Since yesterday, the main goal in the following few days is building GEOtop under Windows 7.\\
+
+\noindent Everything is totally new. The source codes are going to be built as static libraries in order to get a complete executable, maybe exploitable in every machine with a Win7 OS.\par\medskip
+
+\noindent The following tools have been installed:
+
+\begin{itemize}
+\item \textcolor{blue}{Cygwin} (\url{https://cygwin.com/install.html}). During the installation process select:
+  \begin{itemize}
+  \item \textit{Development} option;
+  \item at least one terminal editor;
+  % \item the following packages \textit{docbook-xml-4.5}, \textit{docbook-xsl-1.78.1}, \textit{libxslt-1.1.28}, \textit{docbook2X}, \textit{xmlto} useful to build the documentation of several source codes.
+  \end{itemize}
+\item \textcolor{blue}{Proj4} (\url{https://github.com/OSGeo/proj.4.git}\\\lstinline!git clone https://github.com/OSGeo/proj.4.git!):
+  \begin{itemize}
+  \item First of all, there is no direct support for Cygwin. So switch branch to \lstinline!git checkout tags/4.7.0! and apply the patch (\url{https://github.com/minitage-dependencies/proj-4/blob/master/cygwin.patch}). Actually, the building of Proj4 on Cygwin ends without errors or problems, however it doesn't properly work also with MeteoIO examples, due to the lack of correct flags to build the system under Cygwin;
+  \item the version 4.7.0 of the code has no support for CMake, so it has to be build with \lstinline!configure!
+    \begin{lstlisting}[style=bashStyle]
+# building static libraries
+[fra@sidereus] ~ $ ./configure --enable-shared=off
+[fra@sidereus] ~ $ make
+[fra@sidereus] ~ $ make install
+    \end{lstlisting}
+  \end{itemize}
+\item \textcolor{blue}{MeteoIO 2.4.2} (\url{http://models.slf.ch/p/meteoio/downloads/220/});
+  \begin{itemize}
+  \item build static ON;
+  \item build shared OFF;
+  \item Proj support ON;
+  \end{itemize}
+  with the last option the \lstinline!find_package()! of CMake should recognize the libproj.a.\\
+  Building the MeteoIO examples with static libraries I get the following error:
+    \begin{fullwidth}
+  \begin{lstlisting}[style=bashStyle]
+/usr/local/lib/libmeteoio.a(Coords.cc.o): In function `ZNK3mio6Coords14WGS84_to_PROJ4EddRdS1_':
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1480: undefined reference to `init_plus'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1484: undefined reference to `pj_init_plus'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1490: undefined reference to `pj_transform'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1498: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1499: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1485: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1486: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1481: undefined reference to `pj_free'
+/usr/local/lib/libmeteoio.a(Coords.cc.o):/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1492: more undefined references to `pj_free' follow
+/usr/local/lib/libmeteoio.a(Coords.cc.o): In function `ZNK3mio6Coords14PROJ4_to_WGS84EddRdS1_':
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1524: undefined reference to `pj_init_plus'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1528: undefined reference to `pj_init_plus'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1534: undefined reference to `pj_transform'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1542: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1543: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1525: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1536: undefined reference to `pj_free'
+/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1537: undefined reference to `pj_free'
+/usr/local/lib/libmeteoio.a(Coords.cc.o):/cygdrive/c/Users/francesco/source_code/MeteoIO-2.4.2/meteoio/Coords.cc:1529: more undefined references to `pj_free' follow
+collect2: error: ld returned 1 exit status
+CMakeFiles/2D_interpolations.dir/build.make:86: recipe for target '2D_interpolations.exe' failed
+make[2]: *** [2D_interpolations.exe] Error 1
+CMakeFiles/Makefile2:60: recipe for target 'CMakeFiles/2D_interpolations.dir/all' failed
+make[1]: *** [CMakeFiles/2D_interpolations.dir/all] Error 2
+Makefile:76: recipe for target 'all' failed
+make: *** [all] Error 2
+  \end{lstlisting}
+\end{fullwidth}
+  Why? I have got no answer. Anyway, just linking the Proj4 library again in the CMakeList.txt of the MeteoIO examples solves the problem.
+\item \textcolor{blue}{Boost} (\url{http://sourceforge.net/projects/boost/files/boost/1.58.0/});
+\begin{fullwidth}
+  \begin{lstlisting}[style=bashStyle]
+[fra@sidereus] ~ $ ./bootstrap.sh --with-libraries=filesystem,system,iostreams,regex,program_options,test
+[fra@sidereus] ~ $ ./bjam link=static install
+  \end{lstlisting}
+\end{fullwidth}
+\end{itemize}

@@ -1,0 +1,11 @@
+\section{\printdate{2015/08/18} - Install Docker on ArchLinux}\label{sec:20150818}
+
+To install Docker on Arch Linux, run the following commands:
+
+\begin{lstlisting}[style=bashStyle]
+$ yaourt -Syu
+$ yaourt -Ss docker
+$ yaourt -S docker
+$ sudo ln -sf /usr/bin/docker /usr/local/bin/docker
+\end{lstlisting}
+and then, if you are a \lstinline!bash! user, the docker completaion has been already set up.

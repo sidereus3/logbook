@@ -1,0 +1,36 @@
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+\node {Main Folder}
+child [missing]{}
+child {node {build-debug???}}
+child [missing]{}
+child {node {build-release???}}
+child [missing]{}
+child {node {\textbf{CMakeLists.txt}}}
+child [missing]{}
+child {node {\textbf{src}}
+  child {node {apps}}
+  child {node {cloud\_preproc}}
+  child {node {geotop}}
+  child {node {gt\_utilities}}
+  child {node {inpts\_validator}}
+  child {node {libraries}}
+  child {node {meteoio\_plugin}}
+  child {node {netCDF}}
+  child {node {scripts}}
+}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child [missing]{}
+child {node {\textbf{tests}}}
+;
+\end{tikzpicture}

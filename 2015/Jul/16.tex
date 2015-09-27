@@ -1,0 +1,38 @@
+\section{\printdate{2015/07/16} - GEOtop building-system summarize}\label{sec:20150716}
+
+The main development points are:
+
+\begin{enumerate}
+\item Realize the new CMakeLists structure;
+\item Write the code to compile GEOtop with
+  \begin{itemize}
+    \item OSX;
+    \item Windows.
+  \end{itemize}
+\item Create Virtual Machines for several GNU/Linux OS to compile and create .deb packages every time the GEOtop source code is modified. Eventually, create a bash script in order to automate this process
+\item Packages testing
+\item Create packages with automatic dependencies resolution
+\end{enumerate}
+
+Trying to create a .deb package to solve automatically all the dependencies, I found out this usefull link:
+
+\url{https://wiki.debian.org/IntroDebianPackaging}
+
+\noindent Dependencies to solve (Debian OS) to compile MeteoIO 2.4.2:
+
+\begin{itemize}
+\item libproj-dev
+\end{itemize}
+
+ATTENTION!!! Compiling MeteoIO 2.4.2 on Debian stable 8.1 there is a compatibility dependency problem with Ubuntu 14.04: the last one has gcc 4.8.4 in the default repositories, while debian is using gcc 4.9. The only solution is compile the code, also GEOtop source, in ubuntu and testing it on Debian.
+
+Problem solved adding a new repo in ubuntu:
+
+\begin{lstlisting}[style=bashStyle]
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.9
+\end{lstlisting}
+After installing the right version of gcc, the installation of the precompiled package meteoio\_2.4.2-1\_i386.deb has been done through GUI solving the \textbf{libproj} dependecies automatically, just adding the root's password in order to install meteoio.
+
+Anyway, this solution could be a problem for the normal user who should struggle with command-line and terminal.

@@ -1,0 +1,160 @@
+%************************************************************************************%
+%*          - GrowWorkingHard'script - www.growworkinghard.wordpress.com -          *%
+%************************************************************************************%
+%                                                                                    %
+% This file is a script writed to complete our blog's articles (all the external     %
+% reference can be found there). It's needed to explain better concepts and give     %
+% to the users an example or a reference.                                            %
+% We don't give you the warranty that is the best solution, but we do all the        %
+% possible to hit it.                                                                %
+%                                                                                    %
+% You're invited to try our solution and communicate if something does't work or if  %
+% there is a better way to do it!                                                    %
+%                                                                                    %
+% Follow our blog: <http://www.growworkinghard.wordpress.com>                        %
+%                                                                                    %
+% Author: Francesco Serafin                                                          %
+% Date: 2015-05-01                                                                   %
+%                                                                                    %
+%************************************************************************************%
+
+% This is a style to exploit for inline code
+\def\inline{\lstinline[basicstyle=\ttfamily,keywordstyle={}]}
+
+% This is a LaTeX file to include in the main file
+% in order to have several language style available
+% to use in listing parts of LaTeX source
+
+
+\definecolor{lbcolor}{rgb}{0.95,0.95,0.95}
+\definecolor{javared}{rgb}{0.6,0,0}             % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35}     % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35}       % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75}  % javadoc
+
+
+\lstdefinestyle{numbers}{
+        numbers=left,
+        stepnumber=1,
+        numberstyle=\tiny,
+        numbersep=5pt
+}
+
+\lstdefinestyle{myFrame}{
+        backgroundcolor=\color{lbcolor},
+        frame=none
+}
+
+%************************************************************************************%
+%* B                                                                                *%
+%************************************************************************************%
+
+\lstdefinestyle{bashStyle}{
+        language=bash,
+        style=numbers,
+        style=myFrame,
+        basicstyle=\footnotesize\ttfamily,
+        breaklines=true % sets automatic line breaking
+}
+
+%************************************************************************************%
+%* C                                                                                *%
+%************************************************************************************%
+
+\lstdefinelanguage{cmake}{
+        morekeywords={set,project,configure_file,find_package,message,if,else,endif},
+        sensitive=false,
+        morecomment=[l]{\#},
+        morestring=[b]",
+}
+\lstdefinestyle{cmakeStyle}{
+        language=cmake,
+        style=numbers,
+        style=myFrame,
+        basicstyle=\footnotesize\ttfamily,
+        % keywordstyle=\color{blue}\ttfamily,
+        % stringstyle=\color{red}\ttfamily,
+        % commentstyle=\color{javagreen}\ttfamily,
+        % morecomment=[l][\color{magenta}]{\#},
+        numbers=left,
+        numberstyle=\tiny\color{black},
+        stepnumber=1,
+        numbersep=10pt,
+        tabsize=4,
+        showspaces=false,
+        showstringspaces=false,
+        breaklines=true % sets automatic line breaking
+}
+
+\lstdefinestyle{cppStyle}{
+        language=C++,
+        style=numbers,
+        style=myFrame,
+        basicstyle=\footnotesize\ttfamily,
+        keywordstyle=\color{blue}\ttfamily,
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{javagreen}\ttfamily,
+        morecomment=[l][\color{magenta}]{\#},
+        numbers=left,
+        numberstyle=\tiny\color{black},
+        stepnumber=1,
+        numbersep=10pt,
+        tabsize=4,
+        showspaces=false,
+        showstringspaces=false,
+        breaklines=true % sets automatic line breaking
+}
+
+%************************************************************************************%
+%* J                                                                                *%
+%************************************************************************************%
+
+\lstdefinestyle{javaStyle}{
+        language=Java,
+        style=numbers,
+        style=myFrame,
+        keywordstyle=\color{javapurple}\bfseries,
+        basicstyle=\footnotesize\ttfamily,
+        stringstyle=\color{javared},
+        commentstyle=\color{javagreen},
+        morecomment=[s][\color{javadocblue}]{/**}{*/},
+        numbers=left,
+        numberstyle=\tiny\color{black},
+        stepnumber=1,
+        numbersep=10pt,
+        tabsize=4,
+        showspaces=false,
+        showstringspaces=false,
+        breaklines=true % sets automatic line breaking
+}
+
+%************************************************************************************%
+%* R                                                                                *%
+%************************************************************************************%
+
+\lstdefinestyle{Rstyle}{ %
+        language=R,                     % the language of the code
+        basicstyle=\footnotesize\ttfamily,       % the size of the fonts that are used for the code
+        numbers=left,                   % where to put the line-numbers
+        numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+        stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+        % will be numbered
+        numbersep=5pt,                  % how far the line-numbers are from the code
+        backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+        showspaces=false,               % show spaces adding particular underscores
+        showstringspaces=false,         % underline spaces within strings
+        showtabs=false,                 % show tabs within strings adding particular underscores
+        frame=single,                   % adds a frame around the code
+        rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+        tabsize=2,                      % sets default tabsize to 2 spaces
+        captionpos=b,                   % sets the caption-position to bottom
+        breaklines=true,                % sets automatic line breaking
+        breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+        title=\lstname,                 % show the filename of files included with \lstinputlisting;
+        % also try caption instead of title
+        keywordstyle=\color{blue},      % keyword style
+        commentstyle=\color{dkgreen},   % comment style
+        stringstyle=\color{mauve},      % string literal style
+        escapeinside={\%*}{*)},         % if you want to add a comment within your code
+        morekeywords={*,...}            % if you want to add more keywords to the set
+}

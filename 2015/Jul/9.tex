@@ -1,0 +1,31 @@
+\section{\printdate{2015/07/09} - GEOtop CMake -
+  Redesign}\label{sec:20150709}
+
+Today I started working on the CMake structure of the GEOtop source
+code. A fork of the official GitHub repository has been done, in order
+to feel free to try to develop the new building-system. The forked
+repo is \url{https://github.com/francescoS/geotop}.
+
+A new branch in my own forked repo has been created, called
+\textbf{cmake\_redesign}.
+
+First of all, the new folder structure has been applied. Then, the
+main CMakeLists.txt has been splitted creating a new one inside the
+src folder\footnote{Add description about the two main CMakeLists.}.
+
+In the main CMakeLists has been added the target install, in order to
+install the header files in the include directory. Problem: some
+folders (app, cloud\_preproc) don't contain header files. Is it
+necessary to write the corresponding header file?
+
+Following some notes about the commands of CMake scripting
+language. These notes are taken from CMake Tutorial (web-site
+version).
+
+\begin{fullwidth}
+  \begin{lstlisting}[style=cmakeStyle]
+ADD_EXECUTABLE(PRJ_NAME executable.cxx) # I dont'know if I'm obliged to use the PRJ_NAME to add the executable. More research are necessary.
+INCLUDE_DIRECTORIES(``DIR_PATH/DIR_NAME'') # so that the header file can be found for function prototype
+ADD_SUBDIRECTORY(DIR_NAME) # to make use of the new library, so that the library will get built
+  \end{lstlisting}
+\end{fullwidth}

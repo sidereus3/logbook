@@ -1,0 +1,41 @@
+\section{\printdate{2015/07/14} - GEOtop: the new building-system}\label{sec:20150714}
+
+On Saturday $11^{th}$ of July, 2015 the new \textbf{GEOtop Building-System} had been completed. The code is on the branch \textbf{cmake\_redesign} of the forked repository \url{https://github.com/francescoS/geotop.git}.\\
+The new CMakeLists structure is the following:
+
+\begin{fullwidth}
+\input{2015/Jul/cmakeStructure}
+\end{fullwidth}
+
+\subsection{CMakeLists.txt \#1}
+
+This is the redesign of the original main CMakeLists in GEOtop. The previous one was very long and complex because of the necessity to setting up the different variables (TARGET, LIBRARY\_PATH, INCLUDE\_PATH) for every library to link to the executable. This was due to the fact that in the main folder there were library folders, test folder, source folder, etc indistinctly.\\
+The new structure was necessary mainly for two reasons:
+
+\begin{itemize}
+\item ORDERLINESS, in order to have the source code in a directory, while documentation and tests are in their own directories;
+\item BUILDING-SYSTEM SCRIPT READABILITY, because of the add of
+  \begin{itemize}
+  \item \textit{install target} to install the header files, executable and linked libraries;
+  \item \textit{custom target} to get a working \lstinline!make clean!;
+  \item \textit{uninstall target} to uninstall the header files, the executable and the linked libraries.
+  \end{itemize}
+  the main CMakeLists would have become too long, difficult to read, maintain and develop.
+\end{itemize}
+\noindent Now the main CMakeLists contains only generic build-system settings, divided in 8 sections (following listed and explained):
+\begin{enumerate}
+\item Intro section with
+  \begin{itemize}
+  \item default compiler flags;
+  \item project name;
+  \item source code version and setting of the config.h file
+  \end{itemize}
+\item User options
+\item Find dependencies
+\item Libraries linking type and extensions
+\item Extra compiler flags
+\item Install target
+\item Clean target
+\item Uninstall target
+\end{enumerate}
+\medskip\noindent TODO => Implementation of the MSVC variable, in order to allow the compilation through Windows Visual Studio.
