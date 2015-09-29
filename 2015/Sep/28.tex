@@ -1,0 +1,35 @@
+\section{Sep 28th 2015 - Design Patterns}
+
+Going on studying Design Patterns, yesterday and today I finally got
+the following patterns:
+
+\begin{itemize}
+\item \textbf{Strategy Pattern}: it allows the developer to separate
+  and encapsulate what varies from what remains the same;
+\item \textbf{Observer Pattern}: it allows to create a relationship
+  between an Observable which send data (push or pull methodology) to
+  many Observer, knowing nothing about the Observers. This means that
+  there is a loosely coupled design between objects that interact;
+\item \textbf{Decorator Pattern}: considering the chance to wrap and
+  object with many different type of decorators, this pattern allows
+  that opening the main class for extension, but closing it for
+  modification;
+\item \textbf{Factory Method Pattern}: encapsulate the object creation
+  in subclasses, delegating them to decide which class to instantiate;
+\item \textbf{Singleton Pattern}: allows the developer having to deal
+  with only one istance of that class, providing a global point of
+  access to it.
+\end{itemize}
+
+I would like to apply the Factory Method Pattern on Marialaura's
+components. Specifically, I think this pattern might properly fit the
+issue of manage more than one numerical solver, choosing it at run
+time.
+
+\par\medskip
+
+Discussed with Marialaura about managing her components in OMS (the
+code for computing the Residence Time is defintely too slow):
+unfortunately no solution has been found because the problem is due to
+the fact that OMS and consequently reader and writer work timestep per
+timestep.
