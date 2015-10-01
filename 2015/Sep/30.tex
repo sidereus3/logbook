@@ -1,0 +1,40 @@
+\section{Sep 30th 2015 - Design Patterns}
+
+Carrying on with Design Patterns today I learnt how to implement:
+
+\begin{itemize}
+\item \textbf{Adapter Pattern}: it converts the interface of a class
+  into another interface the client expect. There are two Adapter
+  Patterns:
+  \begin{itemize}
+  \item \textbf{Object Adapter}: which uses object composition to wrap
+    the adaptee with the altered interface. It works on Java;
+  \item \textbf{Class Adapter}: which uses inheritance to wrap the
+    adaptee with the altered interface, because it needs multiple
+    inheritance to be implemented. It doesn't work on Java.
+  \end{itemize}
+\item \textbf{Facade Pattern}: it defines a high-leve interface that
+  makes the subsystem easier to use. In this way it decouples a client
+  from a complex subsystem.
+\item \textbf{Template Method Pattern}: it allows to manage an
+  algorithm (defining a skeleton of it in the Template Method) in an
+  abstract class, delegating to subclasses the implementation of some
+  steps of the algorithm. Subclasses can redefine certain steps of an
+  algorithm without changing the algorithm's structure. In the
+  algorithm there might be one or more hooks, methods that are
+  declared in the abstract class, but only given an empty or default
+  implementation. This gives subclasses the ability to ``hook into''
+  the algorithm at various point, if they wish; a subclass is also
+  free to ignore the hook.
+\item \textbf{Iterator Pattern}: it provides a way to access the
+  elements of an aggregate object sequentially without exposing its
+  underlying representation. You might have:
+  \begin{itemize}
+  \item \textit{External Iterator}: the client controls the iteration
+    bu calling \inline!next()! to get the next element;
+  \item \textit{Internal Iterator}: it's controlled by the iterator
+    itself which steps through the elements, so that you have to tell
+    the iterator what to do with those elements as it goes through
+    them.
+  \end{itemize}
+\end{itemize}
