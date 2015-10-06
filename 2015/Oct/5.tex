@@ -1,0 +1,55 @@
+\section{Oct 5th 2015 - Algorithm}
+
+Discussing with Marialaura about the schematization of the river Adige
+and after having read \citeauthor{wang2011:common}
+(\citeyear{wang2011:common}) \cite{wang2011:common}, we arrived at the
+following ideas:
+
+\begin{itemize}
+\item Focus on \textbf{OPN} (Optimal Processor Number): this is going
+  to be the innovation of this work;
+\item Meteo stations will be treated as input data, at the moment I
+  cannot see a way to include them in the tree;
+\item The Net (and the binary tree) will be composed by:
+  \begin{itemize}
+  \item streams;
+  \item dams;
+  \item lakes;
+  \item hydrometers.
+  \end{itemize}
+\end{itemize}
+In order to minimize the users's efforts, just the shapefile of stream
+has to be required in order to process the net. The dbf is going to be
+read and probably only the following columns are necessary:
+
+\begin{itemize}
+\item Hack numbering to get the last stream (to the closure);
+\item Coordinates of the starting point of the single stream;
+\item Coordinates of the ending point of the single stream.
+\end{itemize}
+With these informations I should be able to build the tree just
+looking at the coordinates of the interconnection points. If a node
+has more than two children a ``ghost'' node is introduced, following
+\citeauthor{wang2011:common} (\citeyear{wang2011:common})
+\cite{wang2011:common}. The operation of building the tree, can be
+parallelized, because the numbering of each child depends only on the
+number of the parent node. Each branch of the tree is independent.
+\par\medskip
+The idea is building the tree into an arraylist for example, managing
+a key and an object following the \textit{Composite Pattern} which can
+be:
+
+\begin{itemize}
+\item a complete node;
+\item a ghost node;
+\item a dam;
+\item a leaf.
+\end{itemize}
+The structure of the Composite Pattern should help in realizing a
+flexible framework. To get the data about dams, another dbf could be
+read with coordinates of the dams.
+\par\medskip
+At the moment, no idea about lakes.
+
+\bibliographystyle{apalike} %Stile della bibliografia %
+\bibliography{biblio_francesco_serafin}
