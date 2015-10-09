@@ -17,7 +17,6 @@
 % The units package provides nice, non-stacked fractions and better spacing
 % for units.
 \usepackage{units}
-
 \usepackage{listings}
 
 % \usepackage[useregional,showdow]{datetime2}
@@ -94,14 +93,18 @@ fill = blue!20,text width = 4.5em,minimum height=1cm, text centered]
 \maketitle% this prints the handout title, author, and date
 
 \begin{abstract}
-  \noindent This document describes my daily experiences on
-  Hydroinformatics and IT.  It provides recipes followed to reach each
-  and every small goal. The main purpose pursuaded is the redesign of
-  the famous hydrological model GEOtop.
+  \noindent Everyday life is like programming, I guess. If you love
+  something you can put beauty into it.
+  \flushright - Donald Knuth -
 \end{abstract}
 
 % \printclassoptions
 
+This document describes my daily experiences on Hydroinformatics and
+IT. It provides recipes followed to reach each and every small
+goal. The main purpose pursuaded is the redesign of the famous
+hydrological model GEOtop.
+\par\medskip
 GEOtop is a distributed model of the mass and energy balance of the
 hydrological cycle, which is applicable to simulations in continuum in
 small catchments. GEOtop deals with the effects of topography on the
@@ -118,7 +121,7 @@ peculiar solutions.
 \foreach \Year in {\StartYear,...,\EndYear} { \foreach \Month in
   {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec} { \foreach \Day in
     {1,...,31} { \IfFileExists{\Year/\Month/\Day.tex} {
-        \input{\Year/\Month/\Day.tex} \pagebreak }
+        \include{\Year/\Month/\Day} \pagebreak }
       { % files does not exist, so nothing to do
       }
 
