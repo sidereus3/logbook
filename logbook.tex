@@ -29,6 +29,18 @@
 \usepackage{tikz} %
 \usetikzlibrary{shapes, arrows, trees} % this is to allow the fork right path
 
+% Prints an epigraph and speaker in sans serif, all-caps type.
+\newcommand{\openepigraph}[2]{%
+  %\sffamily\fontsize{14}{16}\selectfont
+  \begin{fullwidth}
+  \sffamily\large
+  \begin{doublespace}
+  \noindent\allcaps{#1}\\% epigraph
+  \noindent\allcaps{#2}% author
+  \end{doublespace}
+  \end{fullwidth}
+}
+
 % Define block styles
 \tikzstyle{decision} = [diamond, draw, fill=red!20, text width=4.5em,
 text badly centered, node distance=3cm, inner sep=0pt]
@@ -86,12 +98,57 @@ fill = blue!20,text width = 4.5em,minimum height=1cm, text centered]
 \newread\mysource
 
 \title{Grow Working Hard\thanks{Inspired by Jonathan R. Shewchuk\newline\includegraphics{306.png}}}
-\author[sidereus]{sidereus - Francesco Serafin \footnotesize{\url{<francesco.serafin.3@gmail.com>}}}
+\author[Francesco Serafin]{sidereus - Francesco Serafin}
 \date{15 May 2015}  % if the \date{} command is left out, the current date will be used
 
 \begin{document}
 
-\maketitle% this prints the handout title, author, and date
+\maketitlepage% this prints the handout title, author, and date
+
+% v.4 copyright page
+\newpage
+\begin{fullwidth}
+~\vfill
+\thispagestyle{empty}%
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{\baselineskip}%
+Copyright \copyright\ \the\year\ \plainauthor
+
+%\par\smallcaps{Published by \thanklesspublisher}
+
+\par\smallcaps{growworkinghard.altervista.org}
+
+\par This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.\index{license}
+
+\end{fullwidth}
+
+\newpage
+\thispagestyle{empty}
+
+\openepigraph{%
+The public is more familiar with bad design than good design.
+It is, in effect, conditioned to prefer bad design, 
+because that is what it lives with. 
+The new becomes threatening, the old reassuring.
+}{Paul Rand%, {\itshape Design, Form, and Chaos}
+}
+\vfill
+\openepigraph{%
+A designer knows that he has achieved perfection 
+not when there is nothing left to add, 
+but when there is nothing left to take away.
+}{Antoine de Saint-Exup\'{e}ry}
+\vfill
+\openepigraph{%
+\ldots the designer of a new system must not only be the implementor and the first 
+large-scale user; the designer should also write the first user manual\ldots 
+If I had not participated fully in all these activities, 
+literally hundreds of improvements would never have been made, 
+because I would never have thought of them or perceived 
+why they were important.
+}{Donald E. Knuth}
+
+\maketitle
 
 \begin{abstract}
   \noindent Everyday life is like programming, I guess. If you love
