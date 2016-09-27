@@ -1,0 +1,35 @@
+\section{Sep 26th 2015 - Back to life}
+
+Back writing after some time.
+
+Today's work: well, I started to take classes of Algorithms and Data
+Structures at DISI. The purpose is to have a background before taking
+classes at the CS Department at CSU.\par\medskip
+
+In the meanwhile, my main goal is the implementation of a Tree data
+structure inside OMS core. Olaf allowed me to push directly on a
+forked version of the OMS core on
+\url{http://alm.engr.colostate.edu}. The starting point of the
+analisys is the \inline!.sim! file to understand how to connect the
+OMS core to the user experience. A new thread is created at row 770 in
+\inline!SimPanel.java! after clicking the \inline!runButton!, thus the
+parsing of the \inline!.sim! file should be done more or less in this
+part of the source code. A \inline!ProcessExcecution! starts at line
+783, calling the method \inline!exec()! at row 205 in
+\inline!ProcessExecution.java! class.
+
+Furthermore, I completed the work on the building script of the
+\url{https://github.com/geoframecomponents/GEOframeUtils}
+repository. The building system is
+Gradle\thanks{\includegraphics{gradle.png}} and the dependencies
+management is automatically done through maven repositories. For this
+reason, a \textbf{maven repo should be organized} to put the
+\inline!jars! of each component for who is going to use them as
+API.\par\medskip
+
+\textbf{FIXED UGLY FONT RENDERING} in Netbeans on ArchLinux. The trick
+is running \inline!Netbeans! with the following options
+
+\begin{lstlisting}[style=bashStyle]
+  netbeans -J-Dswing.aatext=true -J-Dawt.useSystemAAFontSettings=on
+\end{lstlisting}%
